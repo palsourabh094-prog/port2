@@ -1,101 +1,112 @@
-import Image from "next/image";
+import { SiteHeader } from "@/components/site-header"
+import { Hero } from "@/components/hero"
+import { Features } from "@/components/features"
+import { LogoMarquee } from "@/components/logo-marquee"
+import { Pricing } from "@/components/pricing"
+import { AppverseFooter } from "@/components/appverse-footer"
+import Script from "next/script"
 
-export default function Home() {
+// ✅ Force static generation for low TTFB
+export const dynamic = "force-static"
+
+export default function Page() {
+  // Structured data for pricing
+  const pricingStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPageElement",
+    "@id": "https://thePALINDUSTRIES.com/#pricing",
+    name: "Pricing Plans",
+    description: "3D Animation pricing plans - Startup, Pro, and Premium packages for all business needs",
+    url: "https://thePALINDUSTRIES.com/#pricing",
+    mainEntity: {
+      "@type": "PriceSpecification",
+      name: "3D Animation Services",
+      description: "Professional 3D animation services with three pricing tiers",
+      offers: [
+        {
+          "@type": "Offer",
+          name: "Startup Plan",
+          price: "299",
+          priceCurrency: "USD",
+          description: "Up to 15s 3D Animation with 2 revisions",
+        },
+        {
+          "@type": "Offer",
+          name: "Pro Plan",
+          price: "699",
+          priceCurrency: "USD",
+          description: "Up to 25s 3D Animation with 4 revisions",
+        },
+        {
+          "@type": "Offer",
+          name: "Premium Plan",
+          price: "2049",
+          priceCurrency: "USD",
+          description: "40-60s 3D Animation with unlimited revisions",
+        },
+      ],
+    },
+  }
+
+  // Structured data for main page
+  const pageStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://thePALINDUSTRIES.com/",
+    name: "PALINDUSTRIES | 3D Animation Made Simple, Reliable & Scalable",
+    description:
+      "From product launches to full-scale campaigns, PALINDUSTRIES delivers 3D animation that’s fast, consistent, and built to wow your audience.",
+    url: "https://thePALINDUSTRIES.com/",
+    mainEntity: {
+      "@type": "Organization",
+      name: "PALINDUSTRIES",
+      url: "https://thePALINDUSTRIES.com",
+      sameAs: [
+        "https://twitter.com/thePALINDUSTRIES",
+        "https://www.youtube.com/@PALINDUSTRIESinternational",
+        "https://instagram.com/thePALINDUSTRIES",
+        "https://threads.com/thePALINDUSTRIES",
+      ],
+    },
+    hasPart: [
+      {
+        "@type": "WebPageElement",
+        "@id": "https://thePALINDUSTRIES.com/#pricing",
+        name: "Pricing Section",
+        url: "https://thePALINDUSTRIES.com/#pricing",
+      },
+    ],
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+    <>
+      <main className="min-h-[100dvh] text-white">
+        <SiteHeader />
+        <Hero />
+        <Features />
+        <LogoMarquee />
+        <Pricing />
+        <AppverseFooter />
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+
+      {/* JSON-LD structured data */}
+      <Script
+        id="pricing-structured-data"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(pricingStructuredData),
+        }}
+      />
+
+      <Script
+        id="page-structured-data"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(pageStructuredData),
+        }}
+      />
+    </>
+  )
 }
